@@ -101,7 +101,7 @@ public class AnuncioServiceImpl implements AnuncioService{
 			if(!anuncioDAO.update(conn, a)) {
 				return false;
 			}
-			if (!modificaciones.isEmpty()) {
+			if (modificaciones!=null && !modificaciones.isEmpty()) {
 				modificacionDAO.create(conn, modificaciones);	
 			}
 			commit = true;
