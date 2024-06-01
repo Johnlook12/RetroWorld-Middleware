@@ -12,7 +12,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.DireccionDAO;
 import com.pinguela.retroworld.dao.EmpleadoDAO;
 import com.pinguela.retroworld.model.Empleado;
@@ -185,7 +185,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO{
 		ResultSet rs = null;
 		try {
 			
-			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, TIPO_EMPLEADO_ID");
+			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, TIPO_EMPLEADO_ID, FECHA_BAJA");
 			query.append(" FROM EMPLEADO");
 			query.append(" WHERE ID = ?");
 			
@@ -226,7 +226,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO{
 		ResultSet rs = null;
 		try {
 			
-			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, TIPO_EMPLEADO_ID");
+			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, TIPO_EMPLEADO_ID, FECHA_BAJA");
 			query.append(" FROM EMPLEADO");
 			query.append(" WHERE EMAIL LIKE ?");
 			
@@ -265,7 +265,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO{
 		ResultSet rs = null;
 		try {
 			
-			StringBuilder query = new StringBuilder("SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, TIPO_EMPLEADO_ID");
+			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, TIPO_EMPLEADO_ID, FECHA_BAJA");
 			query.append(" FROM EMPLEADO");
 			query.append(" ORDER BY ID DESC");
 			
@@ -301,6 +301,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO{
 		e.setPassword(rs.getString(i++));
 		e.setEmail(rs.getString(i++));
 		e.setIdTipoEmpleado(rs.getShort(i++));
+		e.setFechaBaja(rs.getDate(i++));
 		
 		e.setDireccion(direccionDAO.findByIdEmpleado(conn, e.getId()));
 		

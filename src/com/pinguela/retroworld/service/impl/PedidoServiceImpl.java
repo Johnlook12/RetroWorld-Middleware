@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.PedidoDAO;
 import com.pinguela.retroworld.dao.impl.PedidoDAOImpl;
 import com.pinguela.retroworld.model.LineaPedido;
@@ -52,6 +52,23 @@ public class PedidoServiceImpl implements PedidoService{
 		return precioTotal;
 	}
 
+	public List<Pedido> findByAll() throws DataException{
+		Connection conn = null;
+		List<Pedido> resultados = null;
+		boolean commit = false;
+		try {
+			conn = JDBCUtils.getConnection();
+			conn.setAutoCommit(false);
+			resultados = pedidoDAO.findByAll(conn);
+			commit=true;
+		} catch(SQLException ex) {
+			logger.error(ex.getMessage(), ex);
+			throw new DataException();
+		} finally {
+			JDBCUtils.close(conn, commit);
+		}
+		return resultados;
+	}
 
 	public Pedido findById(Long id) throws DataException{
 		Connection conn = null;

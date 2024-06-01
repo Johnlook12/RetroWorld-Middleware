@@ -1,6 +1,6 @@
-package com.pinguela.retroworld.dao;
+package com.pinguela;
 
-public class DataException extends Exception{
+public class DataException extends PinguelaException{
 	/*
 	 * Exception raiz de datos.
 	 * */

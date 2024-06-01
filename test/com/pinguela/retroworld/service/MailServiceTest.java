@@ -3,6 +3,7 @@ package com.pinguela.retroworld.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.pinguela.MailException;
 import com.pinguela.retroworld.service.impl.MailServiceImpl;
 
 public class MailServiceTest {

@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.ModificacionDAO;
 import com.pinguela.retroworld.dao.impl.ModificacionDAOImpl;
 import com.pinguela.retroworld.model.Modificacion;
@@ -60,6 +60,24 @@ public class ModificacionServiceImpl implements ModificacionService{
 		return resultados;
 	}
 
+	@Override
+	public List<Modificacion> findByIdAnuncio(Long idAnuncio) throws DataException {
+		Connection conn = null;
+		List<Modificacion> resultados = null;
+		boolean commit = false;
+		try {
+			conn = JDBCUtils.getConnection();
+			conn.setAutoCommit(false);
+			resultados = modificacionDAO.findByIdAnuncio(conn, idAnuncio);
+			commit = true;
+		}catch(SQLException e) {
+			logger.error(e.getMessage(), e);
+			throw new DataException(e);
+		} finally {
+			JDBCUtils.close(conn,commit);
+		}
+		return resultados;
+	}
 
 	public void create(List<Modificacion> modificaciones) throws DataException{
 		Connection conn = null;

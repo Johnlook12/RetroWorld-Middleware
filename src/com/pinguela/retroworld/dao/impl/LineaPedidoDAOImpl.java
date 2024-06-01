@@ -11,7 +11,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.LineaPedidoDAO;
 import com.pinguela.retroworld.model.LineaPedido;
 import com.pinguela.retroworld.util.JDBCUtils;

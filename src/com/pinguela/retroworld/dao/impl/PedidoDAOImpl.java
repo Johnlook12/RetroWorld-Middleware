@@ -11,9 +11,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.LineaPedidoDAO;
 import com.pinguela.retroworld.dao.PedidoDAO;
+import com.pinguela.retroworld.model.Pedido;
 import com.pinguela.retroworld.model.LineaPedido;
 import com.pinguela.retroworld.model.Pedido;
 import com.pinguela.retroworld.util.JDBCUtils;
@@ -109,6 +110,33 @@ public class PedidoDAOImpl implements PedidoDAO{
 		}
 		return true;
 	}
+	
+	public List<Pedido>findByAll(Connection conn)throws DataException{
+		List<Pedido> resultados = new ArrayList<Pedido>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			
+			StringBuilder query = new StringBuilder(" SELECT P.ID, P.FECHA, U.NOMBRE, P.USUARIO_ID, PRECIO_TOTAL, ESTADO_PEDIDO_ID, EP.NOMBRE, U.NICKNAME");
+			query.append(" FROM PEDIDO P");
+			query.append(" INNER JOIN USUARIO U ON U.ID = P.USUARIO_ID");
+			query.append(" INNER JOIN ESTADO_PEDIDO EP ON EP.ID = P.ESTADO_PEDIDO_ID");
+			query.append(" ORDER BY ID ASC");
+			pstmt = conn.prepareStatement(query.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				resultados.add(loadNext(conn,rs));
+			}
+		} catch(SQLException e) {
+			logger.error(e);
+			throw new DataException(e);
+		} finally {
+			JDBCUtils.close(pstmt, rs);
+		}
+		return resultados;
+}
 
 	
 	public Pedido findById(Connection conn, Long id) throws DataException{
@@ -117,9 +145,10 @@ public class PedidoDAOImpl implements PedidoDAO{
 		ResultSet rs = null;
 		try {
 			
-			StringBuilder query = new StringBuilder(" SELECT P.ID, P.FECHA, U.NOMBRE, P.USUARIO_ID, PRECIO_TOTAL, ESTADO_PEDIDO_ID");
+			StringBuilder query = new StringBuilder(" SELECT P.ID, P.FECHA, U.NOMBRE, P.USUARIO_ID, PRECIO_TOTAL, ESTADO_PEDIDO_ID, EP.NOMBRE, U.NICKNAME");
 			query.append(" FROM PEDIDO P");
 			query.append(" INNER JOIN USUARIO U ON U.ID = P.USUARIO_ID");
+			query.append(" INNER JOIN ESTADO_PEDIDO EP ON EP.ID = P.ESTADO_PEDIDO_ID");
 			query.append(" WHERE P.ID = ?");
 			
 			String sql = query.toString();
@@ -156,9 +185,10 @@ public class PedidoDAOImpl implements PedidoDAO{
 		try {
 			
 			
-			StringBuilder query = new StringBuilder(" SELECT P.ID, P.FECHA, U.NOMBRE, P.USUARIO_ID, PRECIO_TOTAL, ESTADO_PEDIDO_ID");
+			StringBuilder query = new StringBuilder(" SELECT P.ID, P.FECHA, U.NOMBRE, P.USUARIO_ID, PRECIO_TOTAL, ESTADO_PEDIDO_ID, EP.NOMBRE, U.NICKNAME");
 			query.append(" FROM PEDIDO P");
 			query.append(" INNER JOIN USUARIO U ON U.ID = P.USUARIO_ID");
+			query.append(" INNER JOIN ESTADO_PEDIDO EP ON EP.ID = P.ESTADO_PEDIDO_ID");
 			query.append(" WHERE U.ID = ?");
 			query.append(" ORDER BY P.FECHA DESC");
 			
@@ -198,6 +228,8 @@ public class PedidoDAOImpl implements PedidoDAO{
 		p.setIdUsuario(rs.getLong(i++));
 		p.setPrecioTotal(rs.getDouble(i++));
 		p.setIdEstado(rs.getInt(i++));
+		p.setEstado(rs.getString(i++));
+		p.setNickNameUsuario(rs.getString(i++));
 		
 		List<LineaPedido> lineas = lineaPedidoDAO.findByIdPedido(conn, p.getId());
 		p.setLineas(lineas);

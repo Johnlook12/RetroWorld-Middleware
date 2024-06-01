@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.PlataformaDAO;
 import com.pinguela.retroworld.dao.impl.PlataformaDAOImpl;
 import com.pinguela.retroworld.model.Plataforma;

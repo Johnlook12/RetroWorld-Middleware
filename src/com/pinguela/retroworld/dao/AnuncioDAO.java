@@ -2,6 +2,7 @@ package com.pinguela.retroworld.dao;
 
 import java.sql.Connection;
 
+import com.pinguela.DataException;
 import com.pinguela.retroworld.model.Anuncio;
 import com.pinguela.retroworld.model.Results;
 import com.pinguela.retroworld.service.AnuncioCriteria;

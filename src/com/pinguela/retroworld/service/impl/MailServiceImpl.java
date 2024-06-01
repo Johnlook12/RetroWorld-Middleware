@@ -7,8 +7,8 @@ import org.apache.commons.mail.SimpleEmail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.pinguela.MailException;
 import com.pinguela.retroworld.config.ConfigurationParametersManager;
-import com.pinguela.retroworld.service.MailException;
 import com.pinguela.retroworld.service.MailService;
 
 public class MailServiceImpl implements MailService{

@@ -12,7 +12,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.DireccionDAO;
 import com.pinguela.retroworld.dao.UsuarioDAO;
 import com.pinguela.retroworld.model.Usuario;
@@ -164,7 +164,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		
 		try {
 		
-			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL");
+			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, NICKNAME");
 			query.append(" FROM USUARIO");
 			query.append(" WHERE ID = ?");
 			
@@ -199,7 +199,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		
 		try {
 			
-			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL");
+			StringBuilder query = new StringBuilder(" SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, NICKNAME");
 			query.append(" FROM USUARIO");
 			query.append(" WHERE EMAIL = ?");
 			
@@ -232,7 +232,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		
 		try {
 			
-			StringBuilder query = new StringBuilder("SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL");
+			StringBuilder query = new StringBuilder("SELECT ID, NOMBRE, APELLIDO1, APELLIDO2, DNI_NIE, TELEFONO, PASSWORD, EMAIL, NICKNAME");
 			query.append(" FROM USUARIO");
 			query.append(" ORDER BY ID ASC");
 			
@@ -270,6 +270,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		u.setTelefono(rs.getString(i++));
 		u.setPassword(rs.getString(i++));
 		u.setEmail(rs.getString(i++));
+		u.setNickName(rs.getString(i++));
 		
 		return u;
 	}

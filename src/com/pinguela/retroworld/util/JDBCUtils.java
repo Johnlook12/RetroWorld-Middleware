@@ -13,8 +13,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.config.ConfigurationParametersManager;
-import com.pinguela.retroworld.dao.DataException;
 public class JDBCUtils {
 	private static Logger logger = LogManager.getLogger(JDBCUtils.class);
 	private static final String DB_URL_PNAME = "db.url";

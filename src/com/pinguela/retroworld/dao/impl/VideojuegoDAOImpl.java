@@ -11,7 +11,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.GeneroDAO;
 import com.pinguela.retroworld.dao.IdiomaDAO;
 import com.pinguela.retroworld.dao.PlataformaDAO;
@@ -494,4 +494,5 @@ public class VideojuegoDAOImpl implements VideojuegoDAO{
 
 		return v;
 	}
+
 }

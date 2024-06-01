@@ -3,6 +3,11 @@ package com.pinguela.retroworld.model;
 import java.util.Date;
 
 public class Anuncio extends AbstractValueObject {
+	public static final int ESTADO_ACTIVO=1;
+	public static final int ESTADO_FINALIZADO=2;
+	public static final int ESTADO_PENDIENTE=3;
+
+	
 	private Long id;
 	private String titulo;
 	private String descripcion;
@@ -127,5 +132,4 @@ public class Anuncio extends AbstractValueObject {
 	public void setIdEstadoAnuncio(Integer idEstadoAnuncio) {
 		this.idEstadoAnuncio = idEstadoAnuncio;
 	}
-
 }

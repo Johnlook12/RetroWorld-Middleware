@@ -2,7 +2,8 @@ package com.pinguela.retroworld.service;
 
 import java.util.List;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
+import com.pinguela.ServiceException;
 import com.pinguela.retroworld.model.Empleado;
 
 public interface EmpleadoService {

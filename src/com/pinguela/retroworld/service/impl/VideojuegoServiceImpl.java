@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.VideojuegoDAO;
 import com.pinguela.retroworld.dao.impl.VideojuegoDAOImpl;
 import com.pinguela.retroworld.model.Results;
@@ -51,7 +51,7 @@ public class VideojuegoServiceImpl implements VideojuegoService{
 			if(!videojuegoDAO.update(conn, v)) {
 				return false;
 			}
-			conn.commit();
+			commit = true;
 		}catch(SQLException e) {
 			logger.error(e.getMessage(), e);
 			throw new DataException(e);
@@ -61,7 +61,6 @@ public class VideojuegoServiceImpl implements VideojuegoService{
 		return true;
 	}
 
-
 	public Results<Videojuego> findBy(VideojuegoCriteria videojuego, int pos, int pageSize) throws DataException{
 		Connection conn = null;
 		Results<Videojuego> resultados = null;
@@ -70,7 +69,7 @@ public class VideojuegoServiceImpl implements VideojuegoService{
 			conn = JDBCUtils.getConnection();
 			conn.setAutoCommit(false);
 			resultados = videojuegoDAO.findBy(conn, videojuego, pos, pageSize);
-			conn.commit();
+			commit = true;
 		}catch(SQLException e) {
 			logger.error(e.getMessage(), e);
 			throw new DataException(e);
@@ -151,4 +150,6 @@ public class VideojuegoServiceImpl implements VideojuegoService{
 			JDBCUtils.close(conn, commit);
 		}
 	}
+
+
 }

@@ -8,9 +8,11 @@ public class Pedido extends AbstractValueObject{
 	private Long id;
 	private Date fecha;
 	private Long idUsuario;
+	private String nickNameUsuario;
 	private String nombreUsuario;
 	private Double precioTotal;
 	private Integer idEstado;
+	private String estado;
 	private List<LineaPedido> lineas;
 	
 	public Pedido() {
@@ -31,6 +33,14 @@ public class Pedido extends AbstractValueObject{
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getNickNameUsuario() {
+		return nickNameUsuario;
+	}
+
+	public void setNickNameUsuario(String nickNameUsuario) {
+		this.nickNameUsuario = nickNameUsuario;
 	}
 
 	public Long getIdUsuario() {
@@ -64,6 +74,14 @@ public class Pedido extends AbstractValueObject{
 
 	public void setIdEstado(Integer idEstado) {
 		this.idEstado = idEstado;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public List<LineaPedido> getLineas() {

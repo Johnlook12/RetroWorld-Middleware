@@ -27,7 +27,7 @@ public class AnuncioServiceTest{
 		a.setTitulo("Venta The Witcher 3 a buen precio");
 		a.setDescripcion("The witcher 3 en buen estado");
 		a.setFechaInicio(new Date());
-		a.setFechaFin(new Date());
+		a.setFechaFin(null);
 		a.setPrecio(30.0d);
 		a.setIdVideojuego(19l);
 		a.setIdUsuario(1l);
@@ -237,13 +237,13 @@ public class AnuncioServiceTest{
 	
 	public static void main(String []args) throws Exception{
 		AnuncioServiceTest test = new AnuncioServiceTest();
-//		test.testCreate();
+		test.testCreate();
 //		test.testFindById();
 //		test.testFindByTitulo();
 //		test.testFindByDescripcion();
 //		test.testFindByMultipleParameters();
 //		test.testFindByPrecioDesdeHasta();
-		test.testUpdate();
+//		test.testUpdate();
 //		test.testFindByUsuario();
 //		test.testOrderBy();
 //		test.testFindByNombreVideojuego();

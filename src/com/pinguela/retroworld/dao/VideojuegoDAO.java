@@ -3,6 +3,7 @@ package com.pinguela.retroworld.dao;
 import java.sql.Connection;
 import java.util.List;
 
+import com.pinguela.DataException;
 import com.pinguela.retroworld.model.Results;
 import com.pinguela.retroworld.model.Videojuego;
 import com.pinguela.retroworld.service.VideojuegoCriteria;

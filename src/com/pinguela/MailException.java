@@ -1,4 +1,4 @@
-package com.pinguela.retroworld.service;
+package com.pinguela;
 
 public class MailException extends ServiceException{
 	

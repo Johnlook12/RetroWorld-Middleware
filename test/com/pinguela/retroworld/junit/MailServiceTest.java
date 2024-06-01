@@ -4,7 +4,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.pinguela.retroworld.service.MailException;
+import com.pinguela.MailException;
 import com.pinguela.retroworld.service.MailService;
 import com.pinguela.retroworld.service.impl.MailServiceImpl;
 

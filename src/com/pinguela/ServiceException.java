@@ -1,6 +1,6 @@
-package com.pinguela.retroworld.service;
+package com.pinguela;
 
-public class ServiceException extends Exception{
+public class ServiceException extends PinguelaException{
 	/*
 	 * Exception raiz de servicios.
 	 * */

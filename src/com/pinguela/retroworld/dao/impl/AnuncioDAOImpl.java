@@ -12,9 +12,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.AnuncioDAO;
-import com.pinguela.retroworld.dao.DataException;
 import com.pinguela.retroworld.model.Anuncio;
+import com.pinguela.retroworld.model.EstadoAnuncio;
 import com.pinguela.retroworld.model.Results;
 import com.pinguela.retroworld.service.AnuncioCriteria;
 import com.pinguela.retroworld.util.JDBCUtils;
@@ -79,12 +80,13 @@ public class AnuncioDAOImpl implements AnuncioDAO {
 	public boolean softDelete(Connection conn, Long idAnuncio) throws DataException{
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("UPDATE ANUNCIO SET FECHA_FIN = ? WHERE ID = ?");
+			pstmt = conn.prepareStatement("UPDATE ANUNCIO SET FECHA_FIN = ?, ESTADO_ANUNCIO_ID = ? WHERE ID = ?");
 
 			logger.info(pstmt);
 
 			int i =1;
 			pstmt.setDate(i++, new java.sql.Date(new Date().getTime()));
+			pstmt.setInt(i++, EstadoAnuncio.FINALIZADO);
 			pstmt.setLong(i++, idAnuncio);
 
 			int deleteRows = pstmt.executeUpdate();
@@ -118,7 +120,8 @@ public class AnuncioDAOImpl implements AnuncioDAO {
 			pstmt.setString(i++, a.getTitulo());
 			pstmt.setString(i++, a.getDescripcion());
 			pstmt.setDate(i++, new java.sql.Date(a.getFechaInicio().getTime()));
-			pstmt.setDate(i++, new java.sql.Date(a.getFechaFin().getTime()));
+			
+			JDBCUtils.setNullable(pstmt, i++, a.getFechaFin());
 			pstmt.setDouble(i++, a.getPrecio());
 			pstmt.setLong(i++, a.getIdVideojuego());
 			JDBCUtils.setNullable(pstmt, i++, a.getIdUsuario());
@@ -382,7 +385,6 @@ public class AnuncioDAOImpl implements AnuncioDAO {
 		a.setNombreVideojuego(rs.getString(i++));
 		a.setEstadoAnuncio(rs.getString(i++));
 		a.setIdEstadoAnuncio(rs.getInt(i++));
-
 		return a;
 
 	}

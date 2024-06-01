@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.model.Direccion;
 import com.pinguela.retroworld.model.Empleado;
 import com.pinguela.retroworld.service.impl.EmpleadoServiceImpl;
@@ -73,7 +73,7 @@ public class EmpleadoServiceTest {
 	public void testFindById() throws Exception{
 		logger.traceEntry("Testing findById...");
 		Empleado e = null;
-		Long id = 2l;
+		Long id = 1l;
 		e = empleadoService.findById(id);
 		if(e!=null) {
 			logger.info("empleado encontrado: ");

@@ -8,13 +8,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
+import com.pinguela.ServiceException;
 import com.pinguela.retroworld.dao.EmpleadoDAO;
 import com.pinguela.retroworld.dao.impl.EmpleadoDAOImpl;
 import com.pinguela.retroworld.model.Empleado;
 import com.pinguela.retroworld.service.EmpleadoService;
 import com.pinguela.retroworld.service.MailService;
-import com.pinguela.retroworld.service.ServiceException;
 import com.pinguela.retroworld.util.JDBCUtils;
 
 public class EmpleadoServiceImpl implements EmpleadoService{

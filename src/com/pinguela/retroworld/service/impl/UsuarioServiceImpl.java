@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
-import com.pinguela.retroworld.dao.DataException;
+import com.pinguela.DataException;
 import com.pinguela.retroworld.dao.UsuarioDAO;
 import com.pinguela.retroworld.dao.impl.UsuarioDAOImpl;
 import com.pinguela.retroworld.model.Usuario;

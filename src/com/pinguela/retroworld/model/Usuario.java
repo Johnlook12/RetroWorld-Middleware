@@ -2,6 +2,7 @@ package com.pinguela.retroworld.model;
 
 public class Usuario extends AbstractValueObject{
 	private Long id;
+	private String nickName;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
@@ -19,6 +20,15 @@ public class Usuario extends AbstractValueObject{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getNombre() {
@@ -77,8 +87,4 @@ public class Usuario extends AbstractValueObject{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-
-	
 }

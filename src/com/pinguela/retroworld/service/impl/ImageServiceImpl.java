@@ -18,12 +18,14 @@ import com.pinguela.retroworld.service.ImageService;
 public class ImageServiceImpl implements ImageService{
 	private static Logger logger = LogManager.getLogger(ImageServiceImpl.class);
 	private static final String IMAGE_DIRECTORY="images.directory";
-
-	@Override
-	public List<BufferedImage> getVideojuegoImages(Long id) {
+	private static final String VIDEOJUEGO_SUBDIRECTORY="videojuegos";
+	private static final String ANUNCIO_SUBDIRECTORY="anuncios";
+	
+	
+	public List<BufferedImage> getImages(Long id, String subdirectory) {
 		List<BufferedImage>imagenes = new ArrayList<BufferedImage>();
 
-		File imagesDirectory = getDirectory(id);
+		File imagesDirectory = getDirectory(id, subdirectory);
 		File[] imageFiles = imagesDirectory.listFiles();
 
 		if(imageFiles!=null) {
@@ -42,17 +44,29 @@ public class ImageServiceImpl implements ImageService{
 		return imagenes;
 	}
 
-	private File getDirectory(Long id) {
+	
+	public List<BufferedImage> getVideojuegoImages(Long id) {
+		return getImages(id, VIDEOJUEGO_SUBDIRECTORY);
+	}
+	
+	
+	public List<BufferedImage> getAnuncioImages(Long id) {
+		return getImages(id, ANUNCIO_SUBDIRECTORY);
+	}
+	
+	private File getDirectory(Long id, String subdirectory) {
 		String path = new StringBuilder(ConfigurationParametersManager.getValue(IMAGE_DIRECTORY))
 				.append(File.separator)
+				.append(subdirectory)
+				.append(File.separatorChar)
 				.append(id)
 				.toString();
 		return new File(path);
 	}
 
-	@Override
-	public void saveVideojuegoImages(Long id, List<File> imageFiles) {
-		File imagesDirectory = getDirectory(id);
+	
+	public void saveImages(Long id, List<File> imageFiles, String subdirectory) {
+		File imagesDirectory = getDirectory(id, subdirectory);
 		if(!imagesDirectory.exists()) {
 			boolean dirCreated = imagesDirectory.mkdir();
 			if(!dirCreated) {
@@ -75,6 +89,14 @@ public class ImageServiceImpl implements ImageService{
 				logger.error("Error al guardar la imagen: "+ex.getMessage(), ex);
 			}
 		}
+	}
+	
+	public void saveVideojuegoImages(Long id, List<File>imageFiles) {
+		saveImages(id, imageFiles, VIDEOJUEGO_SUBDIRECTORY);
+	}
+	
+	public void saveAnuncioImages(Long id, List<File>imageFiles) {
+		saveImages(id, imageFiles, ANUNCIO_SUBDIRECTORY);
 	}
 	
 	private String getFileExtension(File file) {
@@ -104,5 +126,6 @@ public class ImageServiceImpl implements ImageService{
 		}
 		return "g"+(maxNumber+1)+".jpg";
 	}
+
 
 }
